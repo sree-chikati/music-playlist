@@ -31,10 +31,9 @@ class Playlist:
   def length(self):
     counter = 0
     curr_song = self.__first_song
-    while curr_song != None: 
+    while curr_song.get_title() != None: 
       counter += 1
-      curr_song = curr_song.__next_song
-    
+      curr_song = curr_song.get_next_song()
     return counter
 
 

@@ -19,38 +19,47 @@ class Playlist:
   def find_song(self, title):
     index = 0
     curr_song = self.__first_song
-    while curr_song != None:
-      if curr_song.get_title() == title:
-        return index
+
+    while curr_song:
       index += 1
-    return None
+      curr_song = curr_song.get_next_song()
+      if curr_song == None:
+        return -1
+
+    if curr_song.get_title() == title:
+      return index
 
 
   # TODO: Create a method called remove_song that removes a song from the playlist. This method takes one parameter, title, which is the song that should be removed. 
 
   def remove_song(self, title):
-    prev_song = None
     curr_song = self.__first_song
-    while curr_song != None:
-      if curr_song.get_title() == title:
-        if prev_song != None:
-          prev_song.set_next_song(curr_song.get_next_song())
-        else:
-          curr_song.set_next_song(self.__first_song)
-      prev_song = curr_song
-      curr_song = curr_song.get_next_song()
+
+    if curr_song.get_title() == title: 
+      self.__first_song = curr_song.get_next_song()
+      return print(f'Deleted {title} from Playlist')
+
+    else: 
+      while curr_song:
+        if curr_song.get_next_song().get_title() == title: 
+          curr_song.set_next_song(curr_song.get_next_song())
+          return print(f'Deleted {title} from Playlist')
+        else: 
+          curr_song = curr_song.get_next_song()
 
 
 
   # TODO: Create a method called length, which returns the number of songs in the playlist.
 
   def length(self):
-    counter = 0
+    index = 0
     curr_song = self.__first_song
-    while curr_song.get_title() != None: 
-      counter += 1
+
+    while curr_song != None:
+      index += 1
       curr_song = curr_song.get_next_song()
-    return counter
+      
+    return index
 
 
   # TODO: Create a method called print_songs that prints a numbered list of the songs in the playlist.
@@ -61,10 +70,16 @@ class Playlist:
   # 3. Song Title 3
 
   def print_songs(self):
-    counter = 1
+    index = 1
     curr_song = self.__first_song
-    while curr_song != None:
-      print(f'{counter}. {curr_song.get_title()}')
-      counter += 1
+
+    if curr_song == None:
+      print(f"No songs foound in Playlist. Please add some")
+      return None
+
+    while curr_song:
+      print(f"{index}. {curr_song.get_title()}")
+      index += 1
+      curr_song = curr_song.get_next_song()
 
   

@@ -6,9 +6,7 @@ while True:
 
   # Prints welcome message and options menu
   print('''
-
   Welcome to Playlist Maker 🎶  
-
   =====================================
   Options:
   1: View playlist
@@ -17,7 +15,6 @@ while True:
   4: To search for song in playlist
   5: Return the length of the playlist
   =====================================
-
   ''')
 
   # Prints welcome message and options menu
@@ -34,11 +31,10 @@ while True:
     playlist.add_song(song_title)
 
 
-
   # Option 3: To remove a song from playlist
   elif user_selection == 3:
     song_title = input('What song do you want to remove? ')
-    playlist.remove_song(song_title)
+    print(playlist.remove_song(song_title))
 
 
   # Option 4: To search for song in playlist
@@ -60,4 +56,5 @@ while True:
   # Message for invalid input
   else:
     print('That is not a valid option. Try again.\n')
+
 

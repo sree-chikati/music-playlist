@@ -17,17 +17,18 @@ class Playlist:
   # TODO: Create a method called find_song that searches for whether a song exits in the playlist and returns its index. The method has one parameters, title, which is the title of the song to be searched for. If the song is found, return its index.
 
   def find_song(self, title):
-    index = 0
     curr_song = self.__first_song
-
-    while curr_song:
-      index += 1
-      curr_song = curr_song.get_next_song()
-      if curr_song == None:
-        return -1
-
-    if curr_song.get_title() == title:
-      return index
+    index = 0
+    if self.length() is None:
+      return -1
+    else:
+      while curr_song:
+        if curr_song.get_title() == title:
+          return index
+        else:
+          index += 1
+          curr_song = curr_song.get_next_song()
+      return -1
 
 
   # TODO: Create a method called remove_song that removes a song from the playlist. This method takes one parameter, title, which is the song that should be removed. 
@@ -40,7 +41,7 @@ class Playlist:
       return print(f'Deleted {title} from Playlist')
 
     else: 
-      while curr_song:
+      while curr_song.get_title() != title:
         if curr_song.get_next_song().get_title() == title: 
           curr_song.set_next_song(curr_song.get_next_song())
           return print(f'Deleted {title} from Playlist')
